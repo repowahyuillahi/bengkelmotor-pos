@@ -1,0 +1,11 @@
+# Local staging config ONLY (used by `wrangler pages dev` on this VM).
+# database_id below is a placeholder, NOT the production D1 id, so local
+# tooling can never address the production database.
+name = "a3motor"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "dist"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "a3motor-db"
+database_id = "11111111-1111-1111-1111-111111111111"

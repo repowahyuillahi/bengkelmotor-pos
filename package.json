@@ -1,0 +1,1 @@
+{"description":"Local staging for A3 Motor Service Station kasir app (production lives on Cloudflare Pages)","devDependencies":{"wrangler":"^4.0.0"},"name":"a3motor-cf-local","private":true,"scripts":{"dev:local":"wrangler pages dev dist --port 8788 --ip 127.0.0.1"},"version":"1.0.0"}
