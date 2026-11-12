@@ -160,6 +160,13 @@
   .stat .num{font-size:22px; font-weight:700; margin-top:4px}
   .grid-laporan{display:grid; grid-template-columns:1fr 1fr; gap:16px}
   @media (max-width:900px){.grid-laporan{grid-template-columns:1fr}}
+  .badge.up{background:var(--ok-bg); color:var(--ok)}
+  .badge.down{background:var(--destructive-bg); color:var(--destructive)}
+  .badge.flat{background:var(--secondary); color:var(--muted)}
+  .growth{margin-left:8px; vertical-align:3px; font-family:var(--font-sans)}
+  .hbar{height:8px; background:var(--secondary); border-radius:999px; overflow:hidden; margin-top:4px}
+  .hbar > div{height:100%; background:var(--accent); border-radius:999px}
+  .dash-note{margin-top:6px}
   .rep-h{font-size:15px; margin-bottom:10px}
   .btn.period-on{background:var(--ink); color:#FAFAFA; border-color:var(--ink)}
   section.view{display:none} section.view.active{display:block}
@@ -190,7 +197,11 @@
     <div class="side-sep"></div>
     <nav class="nav-group" aria-label="Menu">
       <div class="nav-label">Menu</div>
-      <button class="nav-btn active" id="nav-kasir" onclick="showView('kasir')">
+      <button class="nav-btn active" id="nav-dashboard" onclick="showView('dashboard')">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+        Dashboard
+      </button>
+      <button class="nav-btn" id="nav-kasir" onclick="showView('kasir')">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         Kasir
       </button>
@@ -243,15 +254,56 @@
       <button class="btn-menu" id="btn-menu" aria-label="Buka menu" onclick="toggleSidebar()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
       </button>
-      <h1 id="page-title">Kasir</h1>
+      <h1 id="page-title">Dashboard</h1>
       <div class="top-meta">
         <span class="chip date" id="top-date"></span>
         <span class="chip"><span class="top-chip-label">Pendapatan hari ini</span> <b class="num" id="top-revenue">Rp0</b></span>
       </div>
     </header>
     <main class="content">
+  <!-- DASHBOARD -->
+  <section id="view-dashboard" class="view active" aria-label="Dashboard">
+    <div id="dashboard-state" style="margin-bottom:16px"></div>
+    <div class="stat">
+      <div class="card box"><div class="muted small">PENDAPATAN HARI INI</div><div class="num"><span id="dash-rev-today">Rp0</span><span id="dash-rev-today-growth"></span></div><div class="muted small dash-note" id="dash-rev-today-prev"></div></div>
+      <div class="card box"><div class="muted small">PROFIT HARI INI</div><div class="num"><span id="dash-profit-today">Rp0</span><span id="dash-profit-today-growth"></span></div><div class="muted small dash-note" id="dash-profit-today-prev"></div></div>
+      <div class="card box"><div class="muted small">PENDAPATAN BULAN INI</div><div class="num"><span id="dash-rev-month">Rp0</span><span id="dash-rev-month-growth"></span></div><div class="muted small dash-note" id="dash-rev-month-prev"></div></div>
+      <div class="card box"><div class="muted small">PROFIT BULAN INI</div><div class="num"><span id="dash-profit-month">Rp0</span><span id="dash-profit-month-growth"></span></div><div class="muted small dash-note" id="dash-profit-month-prev"></div></div>
+    </div>
+    <div class="stat">
+      <div class="card box"><div class="muted small">TRANSAKSI BULAN INI</div><div class="num"><span id="dash-count-month">0</span><span id="dash-count-month-growth"></span></div><div class="muted small dash-note" id="dash-count-month-prev"></div></div>
+      <div class="card box"><div class="muted small">RATA-RATA PER TRANSAKSI</div><div class="num" id="dash-avg-month">Rp0</div><div class="muted small dash-note" id="dash-avg-month-prev"></div></div>
+      <div class="card box"><div class="muted small">PENDAPATAN PART BULAN INI</div><div class="num" id="dash-rev-barang-month">Rp0</div><div class="muted small dash-note" id="dash-qty-barang-month"></div></div>
+      <div class="card box"><div class="muted small">PENDAPATAN JASA BULAN INI</div><div class="num" id="dash-rev-jasa-month">Rp0</div><div class="muted small dash-note" id="dash-qty-jasa-month"></div></div>
+      <div class="card box"><div class="muted small">TRANSAKSI BATAL BULAN INI</div><div class="num" id="dash-cancelled-month">0</div><div class="muted small dash-note">Tidak dihitung sebagai pendapatan</div></div>
+    </div>
+    <div class="card" style="margin-bottom:16px">
+      <h2 class="rep-h">Pendapatan 30 Hari Terakhir</h2>
+      <div id="dash-chart-30"><p class="muted">Belum ada data.</p></div>
+      <p class="muted small dash-note" id="dash-chart-30-note"></p>
+    </div>
+    <div class="card" style="margin-bottom:16px">
+      <h2 class="rep-h">Pertumbuhan Pendapatan 6 Bulan Terakhir</h2>
+      <div id="dash-chart-6m"><p class="muted">Belum ada data.</p></div>
+    </div>
+    <div class="grid-laporan">
+      <div class="card">
+        <h2 class="rep-h">Metode Pembayaran Bulan Ini</h2>
+        <div id="dash-methods"><p class="muted">Belum ada data.</p></div>
+      </div>
+      <div class="card">
+        <h2 class="rep-h">Part vs Jasa Bulan Ini</h2>
+        <div id="dash-types"><p class="muted">Belum ada data.</p></div>
+      </div>
+      <div class="card" style="grid-column:1/-1">
+        <h2 class="rep-h">Terlaris Bulan Ini</h2>
+        <div id="dash-top"><p class="muted">Belum ada data.</p></div>
+      </div>
+    </div>
+  </section>
+
   <!-- KASIR -->
-  <section id="view-kasir" class="view active" aria-label="Kasir">
+  <section id="view-kasir" class="view" aria-label="Kasir">
     <div id="kasir-shift-banner"></div>
     <div class="grid-kasir">
       <div class="card">
@@ -693,7 +745,7 @@
 <script>
 const rp = n => "Rp" + new Intl.NumberFormat("id-ID").format(Number(n) || 0);
 const $ = id => document.getElementById(id);
-const TITLES = { kasir: "Kasir", barang: "Stok Barang", jasa: "Kelola Jasa", riwayat: "Riwayat Transaksi", laporan: "Laporan", pelanggan: "Data Pelanggan", pengaturan: "Pengaturan Toko" };
+const TITLES = { dashboard: "Dashboard", kasir: "Kasir", barang: "Stok Barang", jasa: "Kelola Jasa", riwayat: "Riwayat Transaksi", laporan: "Laporan", pelanggan: "Data Pelanggan", pengaturan: "Pengaturan Toko" };
 let ITEMS = [];
 let CART = new Map();
 let currentTxId = null;
@@ -714,12 +766,13 @@ async function api(path, opts) {
   return data;
 }
 function showView(name) {
-  for (const v of ["kasir", "barang", "jasa", "riwayat", "laporan", "pelanggan", "pengaturan"]) {
+  for (const v of ["dashboard", "kasir", "barang", "jasa", "riwayat", "laporan", "pelanggan", "pengaturan"]) {
     $("view-" + v).classList.toggle("active", v === name);
     $("nav-" + v).classList.toggle("active", v === name);
   }
   $("page-title").textContent = TITLES[name];
   toggleSidebar(false);
+  if (name === "dashboard") loadDashboard();
   if (name === "riwayat") loadSummary();
   if (name === "laporan") { if ($("rep-from").value) loadReport(); else setPeriod("today"); }
   if (name === "pelanggan") loadCustomers();
@@ -1022,7 +1075,7 @@ async function changePin() {
     closeModal("modal-pin"); toast("PIN berhasil diganti");
   } catch (e) { toast(e.message, true); }
 }
-async function startApp() { await loadItems(); loadSummary(); loadShift(); }
+async function startApp() { await loadItems(); loadSummary(); loadShift(); showView("dashboard"); }
 
 /* ---------- KASIR ---------- */
 function renderKasirItems() {
@@ -1487,6 +1540,162 @@ async function loadReport() {
     loadShifts();
   } catch (e) {
     stateBox($("laporan-state"), "err", 'Laporan gagal dimuat. <button class="btn secondary sm" onclick="loadReport()">Coba lagi</button>');
+  }
+}
+/* ---------- DASHBOARD ---------- */
+const MONTHS_ID = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
+function growthPct(curr, prev) {
+  curr = Number(curr) || 0; prev = Number(prev) || 0;
+  if (prev === 0) return curr > 0 ? null : 0;
+  return (curr - prev) / prev * 100;
+}
+function fmtGrowth(curr, prev) {
+  const g = growthPct(curr, prev);
+  if (g === null) return "Baru";
+  if (g === 0) return "0%";
+  const sign = g > 0 ? "+" : "";
+  return sign + g.toFixed(1).replace(".", ",") + "%";
+}
+function growthBadge(curr, prev) {
+  const g = growthPct(curr, prev);
+  const cls = g === null || g > 0 ? "up" : (g < 0 ? "down" : "flat");
+  return `<span class="badge ${cls} growth">${fmtGrowth(curr, prev)}</span>`;
+}
+function monthRange(ymd, offset) {
+  const y = Number(ymd.slice(0, 4)), m = Number(ymd.slice(5, 7)) - 1 + offset;
+  const iso = d => d.toISOString().slice(0, 10);
+  return { from: iso(new Date(Date.UTC(y, m, 1))), to: iso(new Date(Date.UTC(y, m + 1, 0))) };
+}
+function reportRange(from, to) {
+  return api("/api/report?from=" + encodeURIComponent(from) + "&to=" + encodeURIComponent(to));
+}
+function barChartSvg(points, opts) {
+  opts = opts || {};
+  const W = 720, H = 200, topPad = 28, bottomPad = opts.twoLines ? 46 : 28;
+  const base = H - bottomPad;
+  const max = Math.max(1, ...points.map(p => Number(p.value) || 0));
+  const n = Math.max(1, points.length);
+  const slot = W / n;
+  const bw = Math.max(3, Math.min(36, slot * 0.6));
+  let s = `<svg viewBox="0 0 ${W} ${H}" style="width:100%; height:auto; display:block" role="img" aria-label="Grafik batang pendapatan">`;
+  s += `<text x="2" y="14" font-size="11" fill="var(--muted)">Tertinggi ${escapeHtml(rp(max))}</text>`;
+  s += `<line x1="0" y1="${base}" x2="${W}" y2="${base}" stroke="var(--border)"/>`;
+  if (opts.axisRight) s += `<text x="${W - 2}" y="${base + 16}" font-size="10.5" fill="var(--muted)" text-anchor="end">${escapeHtml(opts.axisRight)}</text>`;
+  points.forEach((p, i) => {
+    const v = Number(p.value) || 0;
+    const h = Math.round((v / max) * (base - topPad));
+    const x = (i + 0.5) * slot - bw / 2;
+    s += `<rect x="${x.toFixed(1)}" y="${base - h}" width="${bw.toFixed(1)}" height="${h}" rx="2" fill="var(--accent)"><title>${escapeHtml(p.label)}: ${escapeHtml(rp(v))}</title></rect>`;
+    if (p.sub) s += `<text x="${((i + 0.5) * slot).toFixed(1)}" y="${base + 16}" font-size="10.5" fill="var(--muted)" text-anchor="middle">${escapeHtml(p.sub)}</text>`;
+    if (p.sub2) s += `<text x="${((i + 0.5) * slot).toFixed(1)}" y="${base + 30}" font-size="10.5" fill="var(--muted)" text-anchor="middle">${escapeHtml(p.sub2)}</text>`;
+  });
+  s += "</svg>";
+  return s;
+}
+function renderDash30(r, today) {
+  const byDay = new Map((r.by_day || []).map(x => [x.day, Number(x.revenue) || 0]));
+  const points = [];
+  for (let i = 29; i >= 0; i--) {
+    const day = shiftDays(today, -i);
+    points.push({ day, value: byDay.get(day) || 0, label: fmtDay(day) });
+  }
+  const total = points.reduce((a, p) => a + p.value, 0);
+  if (!total) {
+    $("dash-chart-30").innerHTML = '<p class="muted">Belum ada transaksi pada periode ini.</p>';
+    $("dash-chart-30-note").textContent = "";
+    return;
+  }
+  let best = points[0];
+  for (const p of points) if (p.value > best.value) best = p;
+  $("dash-chart-30").innerHTML = barChartSvg(points, { axisRight: fmtDay(today) });
+  $("dash-chart-30-note").textContent = "Total 30 hari: " + rp(total) + " · Hari terbaik: " + fmtDay(best.day) + " (" + rp(best.value) + ")";
+}
+function renderDash6(r, today) {
+  const byMonth = new Map();
+  for (const x of (r.by_day || [])) {
+    const k = String(x.day).slice(0, 7);
+    byMonth.set(k, (byMonth.get(k) || 0) + (Number(x.revenue) || 0));
+  }
+  const points = [];
+  for (let off = -5; off <= 0; off++) {
+    const mr = monthRange(today, off);
+    const key = mr.from.slice(0, 7);
+    const y = Number(key.slice(0, 4)), m = Number(key.slice(5, 7));
+    points.push({ value: byMonth.get(key) || 0, label: MONTHS_ID[m - 1] + " " + y, sub: MONTHS_ID[m - 1] + " " + String(y).slice(2) });
+  }
+  const total = points.reduce((a, p) => a + p.value, 0);
+  if (!total) {
+    $("dash-chart-6m").innerHTML = '<p class="muted">Belum ada transaksi pada periode ini.</p>';
+    return;
+  }
+  points.forEach((p, i) => { if (i > 0) p.sub2 = fmtGrowth(p.value, points[i - 1].value); });
+  $("dash-chart-6m").innerHTML = barChartSvg(points, { twoLines: true });
+}
+function renderDashBottom(r) {
+  const methods = r.by_method || [];
+  const maxM = Math.max(1, ...methods.map(m => Number(m.revenue) || 0));
+  $("dash-methods").innerHTML = methods.length ? methods.map(m => {
+    const pct = Math.round((Number(m.revenue) || 0) / maxM * 100);
+    return `<div style="margin-bottom:10px"><div class="row" style="margin:0"><span>${escapeHtml(m.method)} <span class="muted small">(${m.count}x)</span></span><span class="num">${rp(m.revenue)}</span></div><div class="hbar"><div style="width:${pct}%"></div></div></div>`;
+  }).join("") : '<p class="muted">Belum ada data.</p>';
+  const types = r.by_type || [];
+  const tot = types.reduce((a, x) => a + (Number(x.revenue) || 0), 0);
+  const typeName = { barang: "Part", jasa: "Jasa" };
+  $("dash-types").innerHTML = types.length && tot ? types.map(x => {
+    const share = Math.round((Number(x.revenue) || 0) / tot * 100);
+    return `<div style="margin-bottom:10px"><div class="row" style="margin:0"><span>${typeName[x.type] || escapeHtml(x.type)} <span class="muted small">(${x.qty} terjual)</span></span><span><span class="num">${rp(x.revenue)}</span> <span class="muted small">${share}%</span></span></div><div class="hbar"><div style="width:${share}%"></div></div></div>`;
+  }).join("") : '<p class="muted">Belum ada data.</p>';
+  const top = (r.top_items || []).slice(0, 5);
+  $("dash-top").innerHTML = top.length
+    ? "<table><thead><tr><th>Item</th><th>Qty</th><th>Pendapatan</th></tr></thead><tbody>" +
+      top.map(t => `<tr><td style="font-weight:600">${escapeHtml(t.name)}</td><td class="num">${t.qty}</td><td class="num">${rp(t.revenue)}</td></tr>`).join("") +
+      "</tbody></table>"
+    : '<p class="muted">Belum ada data.</p>';
+}
+async function loadDashboard() {
+  stateBox($("dashboard-state"), "info", "Memuat dashboard...");
+  try {
+    const today = wibToday();
+    const yesterday = shiftDays(today, -1);
+    const mNow = monthRange(today, 0), mPrev = monthRange(today, -1);
+    const [rToday, rYest, rMonth, rPrevMonth, r30, r6] = await Promise.all([
+      reportRange(today, today),
+      reportRange(yesterday, yesterday),
+      reportRange(mNow.from, mNow.to),
+      reportRange(mPrev.from, mPrev.to),
+      reportRange(shiftDays(today, -29), today),
+      reportRange(monthRange(today, -5).from, today)
+    ]);
+    stateBox($("dashboard-state"), null);
+    $("dash-rev-today").textContent = rp(rToday.revenue);
+    $("dash-rev-today-growth").innerHTML = growthBadge(rToday.revenue, rYest.revenue);
+    $("dash-rev-today-prev").textContent = "Kemarin " + rp(rYest.revenue);
+    $("dash-profit-today").textContent = rp(rToday.profit);
+    $("dash-profit-today-growth").innerHTML = growthBadge(rToday.profit, rYest.profit);
+    $("dash-profit-today-prev").textContent = "Kemarin " + rp(rYest.profit);
+    $("dash-rev-month").textContent = rp(rMonth.revenue);
+    $("dash-rev-month-growth").innerHTML = growthBadge(rMonth.revenue, rPrevMonth.revenue);
+    $("dash-rev-month-prev").textContent = "Bulan lalu " + rp(rPrevMonth.revenue);
+    $("dash-profit-month").textContent = rp(rMonth.profit);
+    $("dash-profit-month-growth").innerHTML = growthBadge(rMonth.profit, rPrevMonth.profit);
+    $("dash-profit-month-prev").textContent = "Bulan lalu " + rp(rPrevMonth.profit);
+    $("dash-count-month").textContent = rMonth.count;
+    $("dash-count-month-growth").innerHTML = growthBadge(rMonth.count, rPrevMonth.count);
+    $("dash-count-month-prev").textContent = "Bulan lalu " + rPrevMonth.count + " transaksi";
+    $("dash-avg-month").textContent = rp(rMonth.avg);
+    $("dash-avg-month-prev").textContent = "Bulan lalu " + rp(rPrevMonth.avg);
+    const typeRow = (rMonth.by_type || []).find(x => x.type === "barang") || { qty: 0, revenue: 0 };
+    const typeJasa = (rMonth.by_type || []).find(x => x.type === "jasa") || { qty: 0, revenue: 0 };
+    $("dash-rev-barang-month").textContent = rp(typeRow.revenue);
+    $("dash-qty-barang-month").textContent = typeRow.qty + " part terjual";
+    $("dash-rev-jasa-month").textContent = rp(typeJasa.revenue);
+    $("dash-qty-jasa-month").textContent = typeJasa.qty + " jasa terjual";
+    $("dash-cancelled-month").textContent = rMonth.cancelled;
+    renderDash30(r30, today);
+    renderDash6(r6, today);
+    renderDashBottom(rMonth);
+  } catch (e) {
+    stateBox($("dashboard-state"), "err", 'Dashboard gagal dimuat. <button class="btn secondary sm" onclick="loadDashboard()">Coba lagi</button>');
   }
 }
 /* ---------- UNDUH EXCEL & PDF ---------- */
