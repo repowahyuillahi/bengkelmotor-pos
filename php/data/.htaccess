@@ -1,0 +1,3 @@
+# Folder ini berisi database SQLite. Tolak semua akses dari web.
+Require all denied
+Deny from all

@@ -1,0 +1,29 @@
+# A3 Motor Edisi PHP Native - aturan Apache (XAMPP)
+# File ini diletakkan di folder aplikasi (mis. htdocs/a3motor).
+
+# Folder data/ berisi database SQLite: tolak semua akses web.
+RewriteEngine On
+RewriteRule ^data(/.*)?$ - [F,L]
+
+# Semua /api/* diteruskan ke api.php (REQUEST_URI tetap asli).
+RewriteRule ^api(/.*)?$ api.php [L,QSA]
+
+# /landing tanpa ekstensi -> landing.html
+RewriteRule ^landing$ landing.html [L]
+
+# File/folder yang benar-benar ada disajikan langsung,
+# selain itu jatuhkan ke index.php (aplikasi kasir / SPA).
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php [L]
+
+# File backend tidak boleh diakses langsung dari browser.
+# (app.php & api.php tetap bisa dipakai internal lewat require/rewrite:
+#  api.php adalah target rewrite di atas sehingga tidak diblokir,
+#  yang diblokir di sini adalah config.php dan app.php.)
+<FilesMatch "^(config|app)\.php$">
+    Require all denied
+</FilesMatch>
+
+# Jangan tampilkan daftar isi folder.
+Options -Indexes

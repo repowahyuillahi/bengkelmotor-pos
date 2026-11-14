@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A3 Motor Service Station | Bengkel Motor di Padang</title>
+<meta name="description" content="A3 Motor Service Station: bengkel servis motor dan suku cadang di Bandar Buat, Lubuk Kilangan, Kota Padang. Cek gejala, lihat harga layanan, dan booking lewat WhatsApp. Buka Senin sampai Sabtu 09.00–17.00 WIB.">
+<link rel="icon" href="/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#4FB2FF; --accent-strong:#1B7BD4; --navy:#0E1930; --navy2:#1D2D4D;
+    --ink:#0F172A; --muted:#475569; --bg:#FFFFFF; --bg-soft:#F1F5FD; --line:#E4ECFC;
+    --wa:#1FA855; --amber:#F59E0B;
+    --ease:cubic-bezier(0.16, 1, 0.3, 1); --ease2:cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  *{margin:0; padding:0; box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html,body{overflow-x:clip}
+  section[id], div[id="atas"]{scroll-margin-top:86px}
+  body{font-family:"Plus Jakarta Sans", system-ui, sans-serif; color:var(--ink); background:var(--bg); line-height:1.6}
+  h1,h2,.display{font-family:"Plus Jakarta Sans", sans-serif; font-weight:800; line-height:1.16; letter-spacing:-.01em}
+  img{max-width:100%}
+  a{color:var(--accent-strong)}
+  :focus-visible{outline:3px solid var(--accent); outline-offset:2px; border-radius:6px}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 20px}
+  /* Promo strip */
+  .strip{background:linear-gradient(105deg, #FFC53D, var(--amber)); color:#231a02; font-weight:700; font-size:14.5px; text-align:center; padding:8px 16px}
+  .strip a{color:#231a02; text-decoration:underline}
+  /* Topbar */
+  .topbar{position:sticky; top:0; z-index:60; background:linear-gradient(180deg, var(--navy2), var(--navy)); color:#fff; box-shadow:0 4px 20px rgba(2,8,23,.28); border-bottom:1px solid rgba(79,178,255,.22)}
+  .topbar-in{display:flex; align-items:center; gap:12px; padding:10px 0}
+  .brand{display:flex; align-items:center; gap:11px; text-decoration:none; color:#fff; cursor:pointer}
+  .brand img{width:42px; height:42px; border-radius:50%; object-fit:cover; background:#fff}
+  .brand .bname{font-family:"Plus Jakarta Sans",sans-serif; font-weight:800; font-size:17px; line-height:1.2}
+  .brand .bsub{font-size:11.5px; color:#B9CFEF; letter-spacing:.12em; text-transform:uppercase}
+  .topnav{margin-left:auto; display:flex; align-items:center; gap:20px}
+  .topnav a.nl{color:#DCE9FB; text-decoration:none; font-weight:600; font-size:15px; cursor:pointer; transition:color .2s}
+  .topnav a.nl:hover{color:#fff}
+  .btn{display:inline-flex; align-items:center; gap:9px; border:none; cursor:pointer; text-decoration:none; font-family:inherit; font-weight:700; font-size:16px; letter-spacing:.01em; padding:13px 26px; border-radius:999px; transition:all .3s var(--ease); min-height:48px; position:relative; overflow:hidden}
+  .btn-wa::after,.btn-blue::after{content:""; position:absolute; top:0; bottom:0; width:45%; left:-60%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent); transform:skewX(-18deg); transition:left .65s var(--ease); pointer-events:none}
+  .btn-wa:hover::after,.btn-blue:hover::after{left:115%}
+  .btn:active{transform:translateY(1px) scale(.98)}
+  .btn-wa{background:linear-gradient(105deg, #2BD46B, #1FA855 55%, #178A45); color:#fff; box-shadow:0 10px 24px rgba(31,168,85,.32), inset 0 1px 0 rgba(255,255,255,.25)}
+  .btn-wa:hover{transform:translateY(-2px); box-shadow:0 14px 30px rgba(31,168,85,.42), inset 0 1px 0 rgba(255,255,255,.25)}
+  .btn-blue{background:linear-gradient(105deg, var(--accent), var(--accent-strong) 60%, #1668B0); color:#fff; box-shadow:0 10px 24px rgba(27,123,212,.32), inset 0 1px 0 rgba(255,255,255,.28)}
+  .btn-blue:hover{transform:translateY(-2px); box-shadow:0 14px 30px rgba(27,123,212,.42), inset 0 1px 0 rgba(255,255,255,.28)}
+  .btn-ghost{background:rgba(14,25,48,.45); color:#fff; border:2px solid rgba(255,255,255,.7); backdrop-filter:blur(3px); box-shadow:none}
+  .btn-ghost:hover{border-color:#fff; background:rgba(14,25,48,.65); transform:translateY(-1px)}
+  .btn-sm{padding:10px 18px; font-size:15px; min-height:44px}
+  /* Hero */
+  .hero{position:relative; color:#fff; overflow:hidden; background:var(--navy)}
+  .hero-media{position:absolute; inset:0; background:url("/hero.jpg") center 38%/cover no-repeat}
+  .hero-media::after{content:""; position:absolute; inset:0; background:linear-gradient(92deg, rgba(10,18,36,.93) 30%, rgba(10,18,36,.62) 62%, rgba(10,18,36,.28))}
+  .hero-in{position:relative; z-index:1; padding:64px 0 0}
+  .hero-main{max-width:640px; padding-bottom:34px}
+  .open-badge{display:inline-flex; align-items:center; gap:8px; background:rgba(14,25,48,.72); border:1px solid rgba(255,255,255,.35); font-size:14px; font-weight:600; padding:6px 14px; border-radius:999px; margin-bottom:18px}
+  .dot{width:9px; height:9px; border-radius:50%; background:#F87171; flex:none}
+  .dot.on{background:#4ADE80; animation:dotPulse 1.6s ease-in-out infinite alternate}
+  @keyframes dotPulse{from{box-shadow:0 0 0 2px rgba(74,222,128,.18)} to{box-shadow:0 0 0 6px rgba(74,222,128,.05)}}
+  .hero h1{font-size:clamp(2.05rem, 6vw, 3.4rem); margin-bottom:14px; text-shadow:0 2px 16px rgba(0,0,0,.35)}
+  .hero h1 .hl{background:linear-gradient(92deg, #8FCDFF, var(--accent) 55%, #2E9BF0); -webkit-background-clip:text; background-clip:text; color:transparent}
+  .hero p.lead{font-size:clamp(1.02rem, 2.4vw, 1.19rem); color:#E3EEFC; max-width:32em; margin-bottom:26px}
+  .hero-cta{display:flex; gap:12px; flex-wrap:wrap}
+  .trust-row{position:relative; z-index:1; display:flex; gap:10px; flex-wrap:wrap; padding:16px 0 26px}
+  .trust{display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.28); border-radius:999px; padding:7px 15px; font-size:14px; font-weight:600; backdrop-filter:blur(3px)}
+  /* Stats */
+  .stats{background:linear-gradient(105deg, #1668B0, var(--accent-strong) 45%, #2E9BF0); color:#fff}
+  .stats-in{display:grid; grid-template-columns:repeat(4,1fr)}
+  .stat-b{padding:20px 18px; border-left:1px solid rgba(255,255,255,.25)}
+  .stat-b:first-child{border-left:none}
+  .hero-main > *{animation:fadeUp .9s var(--ease) both}
+  .hero-main > *:nth-child(2){animation-delay:.1s}
+  .hero-main > *:nth-child(3){animation-delay:.2s}
+  .hero-main > *:nth-child(4){animation-delay:.3s}
+  .trust-row{animation:fadeUp .9s var(--ease) .45s both}
+  @keyframes fadeUp{from{opacity:0; transform:translateY(26px)} to{opacity:1; transform:translateY(0)}}
+  .stat-b .n{font-family:"Plus Jakarta Sans",sans-serif; font-weight:800; font-size:clamp(1.35rem, 5.2vw, 1.8rem); line-height:1.1}
+  #stat-phone{font-size:clamp(.98rem, 4.4vw, 1.28rem); letter-spacing:.01em}
+  .stat-b .k{font-size:13.5px; color:#CDE6FF; letter-spacing:.06em; text-transform:uppercase}
+  /* Sections */
+  section.blk{padding:72px 0}
+  section.soft{background:var(--bg-soft)}
+  section.navy{background:linear-gradient(135deg, var(--navy) 55%, var(--navy2)); color:#fff}
+  .sec-head{max-width:680px; margin-bottom:36px}
+  .sec-head .kick{color:var(--accent-strong); font-weight:700; letter-spacing:.14em; text-transform:uppercase; font-size:13px; margin-bottom:10px; display:flex; align-items:center; gap:9px}
+  .sec-head .kick::before{content:""; width:26px; height:3px; border-radius:99px; background:linear-gradient(90deg, var(--accent), var(--accent-strong)); flex:none}
+  section.navy .sec-head .kick{color:var(--accent)}
+  .sec-head h2{font-size:clamp(1.55rem, 3.6vw, 2.1rem); margin-bottom:10px}
+  .sec-head p{color:var(--muted); font-size:17px}
+  section.navy .sec-head p{color:#C3D6F2}
+  /* Gejala */
+  .sym-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px}
+  .sym{display:block; background:linear-gradient(165deg, #FFFFFF, #F7FAFF); border:1px solid var(--line); border-radius:18px; padding:18px; text-decoration:none; color:var(--ink); cursor:pointer; box-shadow:0 6px 18px rgba(15,35,75,.05); transition:transform .45s var(--ease), box-shadow .45s var(--ease), border-color .3s var(--ease)}
+  .sym:hover{transform:translateY(-4px); box-shadow:0 16px 32px rgba(15,35,75,.12); border-color:var(--accent)}
+  .sym .ic{width:46px; height:46px; border-radius:14px; background:linear-gradient(150deg, #EAF4FF, #CFE7FF); color:var(--accent-strong); display:flex; align-items:center; justify-content:center; margin-bottom:11px; box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
+  .sym h3{font-size:16.5px; font-weight:700; line-height:1.35; margin-bottom:4px}
+  .sym p{font-size:13.5px; color:var(--muted)}
+  .sym .go{margin-top:9px; font-size:13.5px; font-weight:700; color:var(--wa)}
+  /* Layanan */
+  .svc-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+  .svc{background:linear-gradient(170deg, #FFFFFF, #FAFCFF); border:1px solid var(--line); border-radius:18px; padding:22px 20px 20px; display:flex; flex-direction:column; position:relative; overflow:hidden; box-shadow:0 6px 18px rgba(15,35,75,.05); transition:transform .45s var(--ease), box-shadow .45s var(--ease)}
+  .svc::before{content:""; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg, var(--accent), var(--accent-strong))}
+  .svc:hover{transform:translateY(-4px); box-shadow:0 16px 32px rgba(15,35,75,.12)}
+  .svc .sn{font-weight:700; font-size:17px; display:flex; gap:10px; align-items:flex-start}
+  .svc .sn .ic{color:var(--accent-strong); flex:none; margin-top:1px}
+  .svc .sp{margin-top:10px; color:var(--accent-strong); font-weight:700; font-size:21px}
+  .svc .sp small{display:block; color:var(--muted); font-weight:500; font-size:12.5px}
+  .svc .ask{margin-top:14px; padding-top:12px; border-top:1px dashed var(--line); font-weight:700; font-size:14.5px; color:var(--wa); text-decoration:none; display:inline-flex; gap:7px; align-items:center; cursor:pointer}
+  .svc .ask:hover{text-decoration:underline}
+  .note{margin-top:18px; color:var(--muted); font-size:14.5px}
+  section.navy .note{color:#A9C3E8}
+  /* Cara kerja */
+  .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:26px}
+  .step{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); border-radius:16px; padding:22px}
+  .step .no{font-family:"Plus Jakarta Sans",sans-serif; font-weight:800; font-size:34px; line-height:1; background:linear-gradient(120deg, #8FCDFF, var(--accent)); -webkit-background-clip:text; background-clip:text; color:transparent}
+  .step h3{font-size:17.5px; margin:10px 0 6px; color:#fff}
+  .step p{font-size:14.5px; color:#C3D6F2}
+  .photo-duo{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  .photo-duo figure{border-radius:18px; overflow:hidden; position:relative; box-shadow:0 14px 30px rgba(2,8,23,.35)}
+  .photo-duo img{width:100%; height:250px; object-fit:cover; display:block}
+  .photo-duo figcaption{position:absolute; left:0; right:0; bottom:0; padding:26px 16px 12px; color:#fff; font-weight:600; font-size:14.5px; background:linear-gradient(transparent, rgba(10,18,36,.82))}
+  /* Kenapa */
+  .why-grid{display:grid; grid-template-columns:1fr 1fr; gap:26px; align-items:center}
+  .why-photo{border-radius:20px; overflow:hidden; box-shadow:0 16px 34px rgba(15,35,75,.14)}
+  .why-photo img{width:100%; height:100%; min-height:300px; object-fit:cover; display:block}
+  .check-list{list-style:none; display:grid; gap:16px}
+  .check-list li{display:flex; gap:12px}
+  .check-list .ck{flex:none; width:28px; height:28px; border-radius:50%; background:var(--ok-bg, #E7F7EE); background:#E7F7EE; color:#15803D; display:flex; align-items:center; justify-content:center; margin-top:2px}
+  .check-list h3{font-size:17px; margin-bottom:2px}
+  .check-list p{color:var(--muted); font-size:15px}
+  /* Ulasan */
+  .review-card{background:linear-gradient(160deg, #FFFFFF, #F4F9FF); border:1px solid var(--line); border-radius:20px; padding:28px; display:flex; gap:22px; align-items:center; flex-wrap:wrap; box-shadow:0 10px 26px rgba(15,35,75,.07)}
+  .stars{color:var(--amber); display:flex; gap:2px}
+  .review-card h2{font-size:24px; margin-bottom:6px}
+  .review-card p{color:var(--muted); max-width:44em}
+  .review-card .btn{margin-left:auto}
+  /* FAQ */
+  .faq{max-width:820px}
+  .faq details{background:#fff; border:1px solid var(--line); border-radius:16px; margin-bottom:12px; overflow:hidden; box-shadow:0 4px 14px rgba(15,35,75,.04)}
+  .faq summary{cursor:pointer; font-weight:700; font-size:16.5px; padding:17px 20px; list-style:none; display:flex; justify-content:space-between; gap:12px; align-items:center}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary .pl{color:var(--accent-strong); font-size:22px; line-height:1; transition:transform .35s var(--ease)}
+  .faq details[open ] summary .pl{transform:rotate(45deg)}
+  .faq details[open ] .a{animation:faqIn .4s var(--ease) both}
+  @keyframes faqIn{from{opacity:0; transform:translateY(-5px)} to{opacity:1; transform:translateY(0)}}
+  .faq .a{padding:0 20px 18px; color:var(--muted); font-size:15.5px}
+  /* Lokasi */
+  .loc-grid{display:grid; grid-template-columns:1fr 1fr; gap:22px; align-items:start}
+  .hours{width:100%; border-collapse:collapse; margin-top:6px}
+  .hours td{padding:9px 4px; border-bottom:1px solid var(--line); font-size:16px}
+  .hours td:last-child{text-align:right; font-weight:700}
+  .map-box{border:1px solid var(--line); border-radius:18px; overflow:hidden; background:#fff; box-shadow:0 10px 26px rgba(15,35,75,.07)}
+  .map-facade{padding:34px 22px; text-align:center}
+  .map-facade p{color:var(--muted); margin:8px 0 16px}
+  .map-box iframe{width:100%; height:320px; border:0; display:block}
+  /* Final CTA */
+  .cta-blk{background:linear-gradient(135deg, var(--navy2), var(--navy)); color:#fff; text-align:center}
+  .cta-blk h2{font-size:clamp(1.6rem, 4vw, 2.15rem); margin-bottom:12px}
+  .cta-blk p{color:#C9DBF5; font-size:17.5px; max-width:36em; margin:0 auto 26px}
+  footer{background:var(--navy); color:#B9CFEF; padding:30px 0; font-size:14.5px}
+  .foot-in{display:flex; gap:14px; flex-wrap:wrap; align-items:center; justify-content:space-between}
+  footer a{color:#DCE9FB}
+  /* Sticky bar (mobile) */
+  .sticky-bar{display:none}
+  .reveal{opacity:0; transform:translateY(28px); filter:blur(3px); transition:opacity .8s var(--ease), transform .8s var(--ease), filter .8s var(--ease)}
+  .reveal.on{opacity:1; transform:none; filter:none}
+  .sym-grid .reveal:nth-child(2), .svc-grid .reveal:nth-child(2), .steps .reveal:nth-child(2), .check-list .reveal:nth-child(2){transition-delay:.07s}
+  .sym-grid .reveal:nth-child(3), .svc-grid .reveal:nth-child(3), .steps .reveal:nth-child(3), .check-list .reveal:nth-child(3){transition-delay:.14s}
+  .sym-grid .reveal:nth-child(4), .svc-grid .reveal:nth-child(4), .steps .reveal:nth-child(4), .check-list .reveal:nth-child(4){transition-delay:.21s}
+  .sym-grid .reveal:nth-child(5), .svc-grid .reveal:nth-child(5){transition-delay:.28s}
+  .sym-grid .reveal:nth-child(6), .svc-grid .reveal:nth-child(6){transition-delay:.35s}
+  .sym-grid .reveal:nth-child(7){transition-delay:.42s}
+  .sym-grid .reveal:nth-child(8){transition-delay:.49s}
+  @media (max-width:1020px){
+    .sym-grid{grid-template-columns:repeat(2,1fr)}
+    .steps{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:900px){
+    .hero-in{padding:46px 0 0}
+    .svc-grid{grid-template-columns:1fr 1fr}
+    .loc-grid,.why-grid{grid-template-columns:1fr}
+    .stats-in{grid-template-columns:1fr 1fr}
+    .stat-b{border-left:none; border-top:1px solid rgba(255,255,255,.25)}
+    .sticky-bar{display:grid; grid-template-columns:1.2fr 1fr 1fr; position:fixed; left:0; right:0; bottom:0; z-index:70; background:var(--navy); box-shadow:0 -4px 18px rgba(2,8,23,.35); animation:barUp .7s var(--ease) .9s both}
+    @keyframes barUp{from{transform:translateY(105%)} to{transform:translateY(0)}}
+    .sticky-bar a{display:flex; align-items:center; justify-content:center; gap:7px; color:#fff; text-decoration:none; font-weight:700; font-size:14.5px; padding:14px 6px; cursor:pointer}
+    .sticky-bar a.wa{background:linear-gradient(105deg, #2BD46B, #1FA855 60%, #178A45)}
+    body{padding-bottom:55px}
+    footer{padding-bottom:44px}
+  }
+  @media (max-width:560px){
+    .svc-grid,.photo-duo,.steps{grid-template-columns:1fr}
+    .topnav a.nl{display:none}
+    .topnav .btn{padding:9px 15px; font-size:14px; min-height:42px}
+    section.blk{padding:52px 0}
+    .sec-head{margin-bottom:28px}
+    .trust{gap:6px; padding:6px 12px; font-size:13px}
+    .review-card .btn{margin-left:0}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1; transform:none; filter:none; transition:none}
+    .hero-main > *, .trust-row, .sticky-bar, .faq details[open ] .a{animation:none !important}
+    .dot.on{animation:none}
+    *{transition:none !important}
+  }
+</style>
+</head>
+<body>
+
+<div class="strip">Konsultasi gejala motor <u>GRATIS</u> lewat WhatsApp &nbsp;·&nbsp; <a id="strip-wa" href="#" target="_blank" rel="noopener">Chat sekarang</a></div>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="#atas" aria-label="Kembali ke atas">
+      <img id="brand-logo" src="/logo.png" alt="Logo A3 Motor Service Station">
+      <span><span class="bname" id="brand-name">A3 Motor</span><br><span class="bsub">Service Station</span></span>
+    </a>
+    <nav class="topnav" aria-label="Navigasi halaman">
+      <a class="nl" href="#gejala">Gejala</a>
+      <a class="nl" href="#layanan">Layanan</a>
+      <a class="nl" href="#cara-kerja">Cara Kerja</a>
+      <a class="nl" href="#faq">FAQ</a>
+      <a class="nl" href="#lokasi">Lokasi</a>
+      <a class="btn btn-wa btn-sm" data-wa href="#" target="_blank" rel="noopener">Chat WhatsApp</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero" id="atas">
+  <div class="hero-media" role="img" aria-label="Suasana bengkel A3 Motor Service Station"></div>
+  <div class="wrap hero-in">
+    <div class="hero-main">
+      <span class="open-badge"><span class="dot" id="open-dot"></span><span id="open-text">Memuat status buka...</span></span>
+      <h1 id="hero-title">A3 Motor <span class="hl">Service Station</span></h1>
+      <p class="lead">Motor bermasalah? Ceritakan gejalanya, teknisi kami periksa dulu, biayanya dijelaskan di depan, dan servis hanya dikerjakan setelah kamu setuju.</p>
+      <div class="hero-cta">
+        <a class="btn btn-wa" data-wa href="#" target="_blank" rel="noopener"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Booking via WhatsApp</a>
+        <a class="btn btn-ghost" href="#layanan">Lihat Layanan & Harga</a>
+      </div>
+    </div>
+    <div class="trust-row">
+      <span class="trust"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Pemeriksaan dulu, baru servis</span>
+      <span class="trust"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Harga sesuai katalog, terbuka</span>
+      <span class="trust"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Nota rincian setiap transaksi</span>
+      <span class="trust"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Bayar Tunai, QRIS, Transfer, Debit</span>
+    </div>
+  </div>
+</div>
+
+<div class="stats" aria-label="Info singkat">
+  <div class="wrap stats-in">
+    <div class="stat-b"><div class="n" id="stat-svc">8</div><div class="k">Layanan Servis</div></div>
+    <div class="stat-b"><div class="n">6 Hari</div><div class="k">Buka Setiap Minggu</div></div>
+    <div class="stat-b"><div class="n">09–17</div><div class="k">Jam Layanan WIB</div></div>
+    <div class="stat-b"><div class="n" id="stat-phone">0813-7466-3567</div><div class="k">Telepon / WhatsApp</div></div>
+  </div>
+</div>
+
+<section class="blk soft" id="gejala">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kick">Mulai dari Gejala</div>
+      <h2>Apa yang Terasa Beda dari Motormu?</h2>
+      <p>Pilih gejala yang paling mirip, kamu langsung terhubung ke WhatsApp kami dengan pesan yang sudah terisi. Diagnosis pastinya tetap dari pemeriksaan teknisi di bengkel.</p>
+    </div>
+    <div class="sym-grid" id="sym-grid"></div>
+  </div>
+</section>
+
+<section class="blk" id="layanan">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kick">Layanan & Harga</div>
+      <h2>Daftar Layanan Servis</h2>
+      <p>Harga di bawah ini diambil langsung dari katalog toko kami, jadi selalu sama dengan harga di kasir. Biaya suku cadang menyesuaikan komponen yang diganti dan selalu dijelaskan sebelum pengerjaan.</p>
+    </div>
+    <div class="svc-grid" id="svc-grid">
+      <p class="note">Memuat daftar layanan...</p>
+    </div>
+    <p class="note">Selain jasa servis, kami juga menyediakan suku cadang dan kebutuhan motor seperti oli, ban, kampas rem, dan aki. Tanyakan ketersediaannya lewat WhatsApp sebelum datang.</p>
+  </div>
+</section>
+
+<section class="blk navy" id="cara-kerja">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kick">Cara Kerja</div>
+      <h2>Pemeriksaan Dulu, Baru Servis</h2>
+      <p>Tidak ada pekerjaan yang dikerjakan diam-diam. Kamu tahu temuan teknisi dan biayanya sebelum memutuskan.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="no">1</div><h3>Ceritakan Gejala</h3><p>Datang langsung ke bengkel atau chat WhatsApp dulu, ceritakan keluhan motormu.</p></div>
+      <div class="step reveal"><div class="no">2</div><h3>Teknisi Memeriksa</h3><p>Motor diperiksa langsung untuk menemukan sumber masalahnya.</p></div>
+      <div class="step reveal"><div class="no">3</div><h3>Penjelasan & Pilihan</h3><p>Kamu menerima penjelasan temuan dan rincian biayanya. Tidak ada kewajiban untuk lanjut.</p></div>
+      <div class="step reveal"><div class="no">4</div><h3>Servis Dikerjakan</h3><p>Pekerjaan dimulai setelah kamu setuju, dan selesai dengan nota rincian yang jelas.</p></div>
+    </div>
+    <div class="photo-duo">
+      <figure class="reveal"><img src="/galeri-cvt.jpg" alt="Teknisi memeriksa komponen CVT motor matic" loading="lazy"><figcaption>Pemeriksaan komponen CVT motor matic</figcaption></figure>
+      <figure class="reveal"><img src="/galeri-parts.jpg" alt="Rak suku cadang, oli, dan ban di area toko" loading="lazy"><figcaption>Suku cadang, oli, dan ban tersedia di toko</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="blk" id="kenapa">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kick">Kenapa Kami</div>
+      <h2>Servis yang Jelas dari Awal</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-photo reveal"><img src="/nota.jpg" alt="Mekanik menyerahkan nota dan kunci motor kepada pelanggan" loading="lazy"></div>
+      <ul class="check-list">
+        <li class="reveal"><span class="ck"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><div><h3>Nota untuk Setiap Transaksi</h3><p>Setiap servis dan pembelian selesai dengan nota rincian: item, jumlah, dan harga tertulis jelas.</p></div></li>
+        <li class="reveal"><span class="ck"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><div><h3>Harga Terbuka</h3><p>Daftar harga layanan tampil di halaman ini dan sama dengan harga di katalog kasir kami.</p></div></li>
+        <li class="reveal"><span class="ck"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><div><h3>Suku Cadang di Tempat</h3><p>Oli, ban, kampas rem, aki, dan kebutuhan motor lainnya tersedia di toko, tidak perlu keliling.</p></div></li>
+        <li class="reveal"><span class="ck"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><div><h3>Tanya Dulu, Baru Datang</h3><p>Ragu soal kerusakan atau ketersediaan suku cadang? Chat dulu lewat WhatsApp sebelum meluangkan waktu ke bengkel.</p></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="blk soft" id="ulasan" style="padding-top:0">
+  <div class="wrap">
+    <div class="review-card reveal">
+      <div>
+        <div class="stars" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.57-5 4.36 1.5 6.45L12 16.9 5.99 19.64 7.5 13.19l-5-4.36 6.6-.57L12 2z"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.57-5 4.36 1.5 6.45L12 16.9 5.99 19.64 7.5 13.19l-5-4.36 6.6-.57L12 2z"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.57-5 4.36 1.5 6.45L12 16.9 5.99 19.64 7.5 13.19l-5-4.36 6.6-.57L12 2z"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.57-5 4.36 1.5 6.45L12 16.9 5.99 19.64 7.5 13.19l-5-4.36 6.6-.57L12 2z"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.57-5 4.36 1.5 6.45L12 16.9 5.99 19.64 7.5 13.19l-5-4.36 6.6-.57L12 2z"/></svg>
+        </div>
+        <h2 style="margin-top:8px">Lihat Ulasan Pelanggan Kami</h2>
+        <p>Penilaian asli dari pelanggan tersedia di profil Google Maps kami. Sudah pernah servis di sini? Ulasanmu sangat membantu pengendara lain di Padang.</p>
+      </div>
+      <a class="btn btn-blue" id="btn-reviews" href="#" target="_blank" rel="noopener">Buka Ulasan Google</a>
+    </div>
+  </div>
+</section>
+
+<section class="blk" id="faq" style="padding-top:8px">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kick">FAQ</div>
+      <h2>Pertanyaan yang Sering Ditanyakan</h2>
+    </div>
+    <div class="faq">
+      <details class="reveal"><summary>Apakah harus booking dulu sebelum datang?<span class="pl" aria-hidden="true">+</span></summary><div class="a">Tidak wajib. Kamu bisa datang langsung pada jam buka. Kalau ingin menghindari antre, chat WhatsApp dulu untuk mengecek kondisi bengkel dan ketersediaan suku cadang.</div></details>
+      <details class="reveal"><summary>Berapa biaya servis motor saya?<span class="pl" aria-hidden="true">+</span></summary><div class="a">Harga jasa tampil terbuka di halaman ini dan sama dengan katalog kasir kami. Biaya suku cadang tergantung komponen yang perlu diganti; teknisi akan menjelaskan rincian dan totalnya sebelum pengerjaan dimulai, dan pekerjaan hanya berjalan setelah kamu setuju.</div></details>
+      <details class="reveal"><summary>Apakah saya menerima nota?<span class="pl" aria-hidden="true">+</span></summary><div class="a">Ya. Setiap transaksi selesai dengan nota rincian berisi item pekerjaan, jumlah, dan harganya.</div></details>
+      <details class="reveal"><summary>Metode pembayaran apa saja yang diterima?<span class="pl" aria-hidden="true">+</span></summary><div class="a">Tunai, QRIS, transfer bank, dan kartu debit.</div></details>
+      <details class="reveal"><summary>Berapa lama waktu pengerjaan servis?<span class="pl" aria-hidden="true">+</span></summary><div class="a">Tergantung jenis pekerjaan dan antrean hari itu. Setelah pemeriksaan, teknisi akan memberi perkiraan waktu sebelum mulai mengerjakan, jadi kamu bisa memutuskan untuk menunggu atau kembali lagi.</div></details>
+    </div>
+  </div>
+</section>
+
+<section class="blk soft" id="lokasi">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kick">Lokasi & Jam Buka</div>
+      <h2>Kunjungi Bengkel Kami</h2>
+    </div>
+    <div class="loc-grid">
+      <div class="reveal">
+        <p style="font-size:17px"><strong id="loc-name">A3 Motor Service Station</strong><br><span id="loc-addr">Jalan Piai Tangah, Bandar Buat, Kec. Lubuk Kilangan, Kota Padang 25231</span><br>Telp / WA: <a id="loc-phone" href="#">0813-7466-3567</a></p>
+        <table class="hours" aria-label="Jam buka">
+          <tr><td>Senin – Sabtu</td><td>09.00 – 17.00 WIB</td></tr>
+          <tr><td>Minggu</td><td>Tutup</td></tr>
+        </table>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:20px">
+          <a class="btn btn-blue" id="loc-maps" href="#" target="_blank" rel="noopener">Buka di Google Maps</a>
+          <a class="btn btn-wa" data-wa href="#" target="_blank" rel="noopener">Chat WhatsApp</a>
+        </div>
+      </div>
+      <div class="map-box reveal" id="map-box">
+        <div class="map-facade">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#1B7BD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin:0 auto"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <p>Peta tidak dimuat otomatis agar halaman tetap ringan.</p>
+          <button class="btn btn-blue btn-sm" id="btn-map" type="button">Muat Peta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="blk cta-blk">
+  <div class="wrap reveal">
+    <h2>Motor Bermasalah?</h2>
+    <p>Ceritakan gejalanya lewat WhatsApp. Kami bantu perkirakan layanan yang dibutuhkan dan biayanya sebelum kamu datang.</p>
+    <a class="btn btn-wa" data-wa href="#" target="_blank" rel="noopener">Mulai Chat WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>© <span id="year">2026</span> <span id="foot-name">A3 Motor Service Station</span> · <span id="foot-addr">Bandar Buat, Padang</span></span>
+    <a href="/">Masuk Kasir (khusus staf)</a>
+  </div>
+</footer>
+
+<nav class="sticky-bar" aria-label="Aksi cepat">
+  <a class="wa" data-wa href="#" target="_blank" rel="noopener"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> WhatsApp</a>
+  <a id="sb-tel" href="tel:081374663567"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Telepon</a>
+  <a id="sb-maps" href="#" target="_blank" rel="noopener"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Rute</a>
+</nav>
+
+<script>
+  var LOC = { lat: -0.9504468, lng: 100.4300209 };
+  var STORE = { name: "A3 Motor Service Station", address: "Jalan Piai Tangah, Bandar Buat, Kec. Lubuk Kilangan, Kota Padang 25231", phone: "0813-7466-3567" };
+  function rp(n) { return "Rp" + Number(n || 0).toLocaleString("id-ID"); }
+  function waNum() {
+    var d = String(STORE.phone || "").replace(/\D/g, "");
+    if (d.charAt(0) === "0") d = "62" + d.slice(1);
+    return d;
+  }
+  function waLink(msg) {
+    return "https://wa.me/" + waNum() + "?text=" + encodeURIComponent(msg || ("Halo " + STORE.name + ", saya mau tanya soal servis motor."));
+  }
+  function mapsLink() { return "https://www.google.com/maps/search/?api=1&query=" + LOC.lat + "," + LOC.lng; }
+
+  var SYMPTOMS = [
+    { t: "Susah Distarter", d: "Mesin tidak mau menyala atau starter terasa berat.", ic: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>' },
+    { t: "Tarikan Berat & Brebet", d: "Tenaga drop, tersendat, atau boros bahan bakar.", ic: '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/>' },
+    { t: "CVT Bergetar / Bunyi", d: "Getar saat jalan pelan atau bunyi kasar dari CVT.", ic: '<circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.2 4.2l2.8 2.8M17 17l2.8 2.8M1 12h4M19 12h4M4.2 19.8 7 17M17 7l2.8-2.8"/>' },
+    { t: "Rem Bunyi / Keras", d: "Rem berdecit, terasa keras, atau kurang pakem.", ic: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/>' },
+    { t: "Oli Mesin Rembes", d: "Ada tetesan oli di lantai atau mesin terlihat basah.", ic: '<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/>' },
+    { t: "Ban Aus / Sering Bocor", d: "Ban botak, retak, atau angin cepat habis.", ic: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>' },
+    { t: "Lampu / Kelistrikan Mati", d: "Lampu, klakson, atau panel instrumen tidak menyala.", ic: '<path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.4 1 2.3h6c0-.9.4-1.8 1-2.3A7 7 0 0 0 12 2z"/>' },
+    { t: "Suara Mesin Kasar", d: "Mesin berisik, ngelitik, atau getarannya tidak wajar.", ic: '<path d="M2 13a2 2 0 0 0 2-2V7a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0V4a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0v-4a2 2 0 0 1 2-2"/>' }
+  ];
+  function renderSymptoms() {
+    document.getElementById("sym-grid").innerHTML = SYMPTOMS.map(function (s) {
+      var msg = "Halo " + STORE.name + ", motor saya mengalami gejala: " + s.t.toLowerCase() + ". Kira-kira perlu pemeriksaan apa ya?";
+      return '<a class="sym reveal on" target="_blank" rel="noopener" href="' + waLink(msg) + '"><span class="ic"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + s.ic + '</svg></span><h3>' + s.t + '</h3><p>' + s.d + '</p><span class="go">Konsultasi gejala ini</span></a>';
+    }).join("");
+  }
+  var ICONS = {
+    wrench: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+    drop: '<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/>',
+    disc: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/>',
+    gear: '<circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.2 4.2l2.8 2.8M17 17l2.8 2.8M1 12h4M19 12h4M4.2 19.8 7 17M17 7l2.8-2.8"/>',
+    zap: '<path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/>',
+    tire: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/>',
+    battery: '<rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2"/><path d="M6 11v2M10 11v2"/>',
+    key: '<circle cx="7.5" cy="15.5" r="4.5"/><path d="m11 12 9.5-9.5"/><path d="M15.5 7.5 19 11"/>',
+    sparkles: '<path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>'
+  };
+  function svcIcon(name) {
+    var n = name.toLowerCase();
+    if (n.indexOf("cuci") >= 0) return ICONS.sparkles;
+    if (n.indexOf("oli") >= 0) return ICONS.drop;
+    if (n.indexOf("rem") >= 0 && n.indexOf("remot") < 0) return ICONS.disc;
+    if (n.indexOf("cvt") >= 0 || n.indexOf("rantai") >= 0) return ICONS.gear;
+    if (n.indexOf("injeksi") >= 0 || n.indexOf("busi") >= 0) return ICONS.zap;
+    if (n.indexOf("ban") >= 0) return ICONS.tire;
+    if (n.indexOf("aki") >= 0 || n.indexOf("accu") >= 0) return ICONS.battery;
+    if (n.indexOf("remot") >= 0 || n.indexOf("kunci") >= 0) return ICONS.key;
+    return ICONS.wrench;
+  }
+  function openStatus() {
+    var now = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Jakarta" }));
+    var day = now.getDay(), mins = now.getHours() * 60 + now.getMinutes();
+    var open = day >= 1 && day <= 6 && mins >= 540 && mins < 1020;
+    var dot = document.getElementById("open-dot"), txt = document.getElementById("open-text");
+    dot.classList.toggle("on", open);
+    if (open) txt.textContent = "Buka sekarang · sampai 17.00 WIB";
+    else if (day >= 1 && day <= 6 && mins < 540) txt.textContent = "Tutup · buka hari ini 09.00 WIB";
+    else if (day === 6 || day === 0) txt.textContent = "Tutup · buka Senin 09.00 WIB";
+    else txt.textContent = "Tutup · buka besok 09.00 WIB";
+  }
+  function applyStore() {
+    document.title = STORE.name + " | Bengkel Motor di Padang";
+    document.getElementById("brand-name").textContent = STORE.name.replace(/ Service Station$/i, "");
+    var ht = document.getElementById("hero-title");
+    ht.innerHTML = "";
+    var parts = STORE.name.split(" ");
+    var hl = document.createElement("span"); hl.className = "hl"; hl.textContent = parts.slice(-2).join(" ");
+    ht.append(document.createTextNode(parts.slice(0, -2).join(" ") + " "), hl);
+    document.getElementById("stat-phone").textContent = STORE.phone;
+    document.getElementById("loc-name").textContent = STORE.name;
+    document.getElementById("loc-addr").textContent = STORE.address;
+    var lp = document.getElementById("loc-phone"); lp.textContent = STORE.phone;
+    document.getElementById("foot-name").textContent = STORE.name;
+    document.getElementById("foot-addr").textContent = STORE.address;
+    var wa = waLink();
+    document.querySelectorAll("[data-wa]").forEach(function (a) { a.href = wa; });
+    document.getElementById("strip-wa").href = wa;
+    lp.href = wa;
+    var mp = mapsLink();
+    document.getElementById("loc-maps").href = mp;
+    document.getElementById("btn-reviews").href = mp;
+    document.getElementById("sb-maps").href = mp;
+    document.getElementById("sb-tel").href = "tel:" + String(STORE.phone).replace(/[^0-9+]/g, "");
+    renderSymptoms();
+  }
+  function loadLogo() {
+    var probe = new Image();
+    probe.onload = function () {
+      document.getElementById("brand-logo").src = "/api/logo";
+      var fav = document.querySelector('link[rel="icon"]'); fav.href = "/api/logo";
+    };
+    probe.src = "/api/logo";
+  }
+  function loadSettings() {
+    fetch("/api/settings").then(function (r) { return r.json(); }).then(function (d) {
+      if (!d || !d.success || !d.settings) return;
+      var s = d.settings;
+      if (s.store_name) STORE.name = s.store_name;
+      if (s.store_address) STORE.address = s.store_address;
+      if (s.store_phone) STORE.phone = s.store_phone;
+      var lat = parseFloat(s.store_lat), lng = parseFloat(s.store_lng);
+      if (isFinite(lat) && isFinite(lng)) LOC = { lat: lat, lng: lng };
+      var root = document.documentElement.style;
+      if (s.theme_accent) root.setProperty("--accent", s.theme_accent);
+      if (s.theme_accent_strong) root.setProperty("--accent-strong", s.theme_accent_strong);
+      if (s.theme_sidebar) root.setProperty("--navy", s.theme_sidebar);
+      if (s.theme_sidebar2) root.setProperty("--navy2", s.theme_sidebar2);
+      applyStore();
+    }).catch(function () {});
+  }
+  function loadServices() {
+    fetch("/api/services").then(function (r) { return r.json(); }).then(function (d) {
+      var grid = document.getElementById("svc-grid");
+      var list = (d && d.services) || [];
+      document.getElementById("stat-svc").textContent = list.length || "8";
+      if (!list.length) {
+        grid.innerHTML = '<p class="note">Daftar layanan sedang diperbarui. Silakan tanya langsung lewat WhatsApp untuk info layanan dan harga terbaru.</p>';
+        return;
+      }
+      grid.innerHTML = list.map(function (s) {
+        var msg = "Halo " + STORE.name + ", saya mau tanya layanan " + s.name + " (" + rp(s.price) + ").";
+        return '<article class="svc reveal on"><div class="sn"><span class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + svcIcon(s.name) + '</svg></span><span class="nm"></span></div><div class="sp">' + rp(s.price) + '<small>per layanan, sesuai katalog toko</small></div><a class="ask" target="_blank" rel="noopener" href="' + waLink(msg) + '">Tanya layanan ini<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article>';
+      }).join("");
+      grid.querySelectorAll(".svc .nm").forEach(function (el, i) { el.textContent = list[i].name; });
+    }).catch(function () {
+      document.getElementById("svc-grid").innerHTML = '<p class="note">Daftar layanan tidak dapat dimuat. Silakan tanya langsung lewat WhatsApp untuk info layanan dan harga terbaru.</p>';
+    });
+  }
+  document.getElementById("btn-map").addEventListener("click", function () {
+    document.getElementById("map-box").innerHTML = '<iframe title="Peta lokasi A3 Motor Service Station" loading="lazy" src="https://www.google.com/maps?q=' + LOC.lat + "," + LOC.lng + '&z=17&output=embed"></iframe>';
+  });
+  document.getElementById("year").textContent = new Date().getFullYear();
+  applyStore();
+  openStatus();
+  loadSettings();
+  loadLogo();
+  loadServices();
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); } }); }, { threshold: 0.1 });
+    document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("on"); });
+  }
+</script>
+</body>
+</html>
